@@ -1,0 +1,290 @@
+﻿{
+  "updatedAt": "2026-04-12T00:55:50.327Z",
+  "createdAt": "2026-04-10T03:47:55.367Z",
+  "id": "65rJJZe8mYxEf06X",
+  "name": "Sub-fluxo: Salvar OrÃ§amento",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"cliente_nome\": \"Exemplo\",\n  \"aparelho_modelo\": \"Exemplo\",\n  \"servico_tipo\": \"Exemplo\",\n  \"peca_nome\": \"Exemplo\",\n  \"peca_valor\": 0,\n  \"fornecedor_nome\": \"Exemplo\",\n  \"peca_marca\": \"Exemplo\",\n  \"desconto\": 0,\n  \"observacoes\": \"Exemplo\",\n  \"nivel\": 1,\n  \"horas\": 1,\n  \"urgencia\": 0,\n  \"backup\": 0,\n  \"config_extra\": 0,\n  \"externo\": 0\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1fef0069-63b1-4d61-8867-24e8671de200",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "jsCode": "const peca_custo_bruto = parseFloat($json.peca_valor) || 0;\nconst servico = ($json.servico_tipo || \"\").toLowerCase();\nconst desconto = parseFloat($json.desconto) || 0;\nconst nivel = parseInt($json.nivel) || 1; \nconst horas = parseFloat($json.horas) || 1;\nconst observacoes = $json.observacoes || \"\";\n\nconst extras_valor = (parseInt($json.urgencia) || 0) * 20 + \n                     (parseInt($json.backup) || 0) * 20 + \n                     (parseInt($json.config_extra) || 0) * 15 + \n                     (parseInt($json.externo) || 0) * 30;\n\nlet base_calculo = 0;\nlet tipo_servico = \"\";\n\nif (peca_custo_bruto === 0) {\n    tipo_servico = \"TECNICO\";\n    const valor_hora = 60;\n    const taxa_minima = 35;\n    let fator = (nivel === 2) ? 1.35 : (nivel === 3) ? 1.7 : 1.0;\n    let adicional = (nivel === 2) ? 15 : (nivel === 3) ? 30 : 0;\n    base_calculo = Math.max(taxa_minima, (horas * valor_hora * fator)) + adicional + extras_valor;\n} else {\n    tipo_servico = \"HARDWARE\";\n    const mao_de_obra_fixa = 50;\n    let pelicula = servico.includes('tela') ? 10 : 0;\n    let valor_venda_peca = peca_custo_bruto < 100 ? peca_custo_bruto * 2.5 : peca_custo_bruto * 1.5;\n    base_calculo = valor_venda_peca + mao_de_obra_fixa + pelicula;\n}\n\nreturn {\n    cliente_nome: $json.cliente_nome,\n    aparelho_modelo: $json.aparelho_modelo,\n    servico_tipo: $json.servico_tipo,\n    tipo_registro: tipo_servico,\n    peca_nome: $json.peca_nome || (peca_custo_bruto > 0 ? \"PeÃ§a\" : \"N/A\"),\n    peca_valor: peca_custo_bruto,\n    fornecedor_nome: $json.fornecedor_nome || \"N/A\",\n    peca_marca: $json.peca_marca || \"N/A\",\n    valor_servico: Math.round(base_calculo),\n    desconto: desconto,\n    valor_final: Math.round(base_calculo - desconto),\n    status: \"pendente\",\n    observacoes: observacoes\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "57ae2389-95da-467c-89d1-a3053eece719",
+      "name": "Calculo"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "orcamentos",
+          "mode": "list",
+          "cachedResultName": "orcamentos"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "cliente_nome": "={{ $json.cliente_nome }}",
+            "aparelho_modelo": "={{ $json.aparelho_modelo }}",
+            "servico_tipo": "={{ $json.servico_tipo }}",
+            "valor_servico": "={{ $json.valor_servico }}",
+            "desconto": "={{ $json.desconto }}",
+            "valor_final": "={{ $json.valor_final }}",
+            "fornecedor_nome": "={{ $json.fornecedor_nome }}",
+            "peca_nome": "={{ $json.peca_nome }}",
+            "peca_valor": "={{ $json.peca_valor }}",
+            "peca_marca": "={{ $json.peca_marca }}",
+            "observacoes": "={{ $json.observacoes }}"
+          },
+          "matchingColumns": [
+            "cliente_nome"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "data_criacao",
+              "displayName": "data_criacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aparelho_modelo",
+              "displayName": "aparelho_modelo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "servico_tipo",
+              "displayName": "servico_tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "peca_nome",
+              "displayName": "peca_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "peca_valor",
+              "displayName": "peca_valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fornecedor_nome",
+              "displayName": "fornecedor_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "peca_marca",
+              "displayName": "peca_marca",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "valor_servico",
+              "displayName": "valor_servico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "desconto",
+              "displayName": "desconto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "valor_final",
+              "displayName": "valor_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observacoes",
+              "displayName": "observacoes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        416,
+        0
+      ],
+      "id": "da59524c-c52e-4c0b-a123-2d576276470e",
+      "name": "Atualiza_Banco",
+      "credentials": {
+        "postgres": {
+          "id": "BloJfyAxO4A0hjhz",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Calculo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculo": {
+      "main": [
+        [
+          {
+            "node": "Atualiza_Banco",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "95950b0d-040a-4a03-b726-6b215d110ca1",
+  "activeVersionId": null,
+  "versionCounter": 157,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-10T03:47:55.367Z",
+      "createdAt": "2026-04-10T03:47:55.367Z",
+      "role": "workflow:owner",
+      "workflowId": "65rJJZe8mYxEf06X",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version 06f85f76",
+    "description": ""
+  }
+}

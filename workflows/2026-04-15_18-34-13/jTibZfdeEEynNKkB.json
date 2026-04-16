@@ -1,0 +1,208 @@
+{
+  "updatedAt": "2026-04-15T04:52:15.485Z",
+  "createdAt": "2026-04-15T04:47:10.419Z",
+  "id": "jTibZfdeEEynNKkB",
+  "name": "Criar_tarefa_RR",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "titulo"
+            },
+            {
+              "name": "notas"
+            },
+            {
+              "name": "data_solicitada"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a581ba33-e614-460d-b99e-743367f246b3",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "067c4bb4-e27f-49db-84f9-e0a2351f03a7",
+              "name": "titulo",
+              "value": "={{ $json.titulo }}",
+              "type": "string"
+            },
+            {
+              "id": "9eeae739-89c0-4e29-b89a-b5ea43ea25db",
+              "name": "notas",
+              "value": "={{ $json.notas }}",
+              "type": "string"
+            },
+            {
+              "id": "86561b14-3bb2-4221-9783-6971a65c4e4d",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "6a9959a4-5693-4f43-ae08-bbb1b6619986",
+              "name": "data_solicitada",
+              "value": "={{ $json.data_solicitada }}",
+              "type": "string"
+            },
+            {
+              "id": "2c7f4166-cf3d-43cf-bafb-5d704edb539d",
+              "name": "data_iso",
+              "value": "={{ $json.data_solicitada + 'T00:00:00.000Z' }}",
+              "type": "string"
+            },
+            {
+              "id": "fc71989a-b907-4c90-9ba7-29941edc343b",
+              "name": "data_br",
+              "value": "={{ $json.data_solicitada.split('-').reverse().join('/') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c0df83a9-32fb-4bf2-921b-672317171ebf",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "task": "MTgzMzI5NjA2MTIzODY4MzUxODE6MDow",
+        "title": "={{ $json.titulo }}",
+        "additionalFields": {
+          "dueDate": "={{ $json.data_iso }}",
+          "notes": "={{ $json.notas }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "85586675-2355-46c5-82a2-809b9248f445",
+      "name": "Create a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "xIrv5nUQ2YHF4msK",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\nfunction isoParaBr(iso) {\n  const [y, m, d] = iso.split('-');\n  return `${d}/${m}/${y}`;\n}\n\nreturn [\n  {\n    json: {\n      titulo: item.title || item.titulo || '',\n      notas: item.notes || '',\n      data_solicitada_iso: item.due ? String(item.due).slice(0, 10) : '',\n      data_solicitada_br: item.due ? isoParaBr(String(item.due).slice(0, 10)) : '',\n      task_id: item.id || '',\n      task_link: item.webViewLink || item.selfLink || ''\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "6fb293b2-7fcf-4c7c-9293-aa04c7077693",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Create a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a task": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "titulo": "Ir à igreja",
+          "notas": "N/A",
+          "data_solicitada": "2026-04-19"
+        }
+      }
+    ]
+  },
+  "versionId": "db33016f-00b0-46bd-a507-db8f4aa989bb",
+  "activeVersionId": "db33016f-00b0-46bd-a507-db8f4aa989bb",
+  "versionCounter": 36,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-15T04:47:10.419Z",
+      "createdAt": "2026-04-15T04:47:10.419Z",
+      "role": "workflow:owner",
+      "workflowId": "jTibZfdeEEynNKkB",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version db33016f",
+    "description": ""
+  }
+}

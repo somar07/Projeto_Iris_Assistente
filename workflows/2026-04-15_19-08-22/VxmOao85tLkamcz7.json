@@ -1,0 +1,976 @@
+﻿{
+  "updatedAt": "2026-04-15T06:00:08.034Z",
+  "createdAt": "2026-04-10T02:50:09.746Z",
+  "id": "VxmOao85tLkamcz7",
+  "name": "Assistente _Principal",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        -256
+      ],
+      "id": "b7b8c194-54f8-48f9-b1b9-e6928aa089d1",
+      "name": "Webhook",
+      "webhookId": "2eb8f28b-51ae-447d-adc6-0513ce291295"
+    },
+    {
+      "parameters": {
+        "description": "CHAMADA OBRIGATÃ“RIA: Use esta ferramenta para ENVIAR os dados brutos ao sistema de cÃ¡lculo. O PREÃ‡O NÃƒO EXISTE AQUI, ele serÃ¡ gerado automaticamente pelo servidor assim que vocÃª acionar este comando. Se vocÃª nÃ£o chamar esta ferramenta, o cliente ficarÃ¡ sem preÃ§o",
+        "workflowId": {
+          "__rl": true,
+          "value": "65rJJZe8mYxEf06X",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/65rJJZe8mYxEf06X",
+          "cachedResultName": "Sub-fluxo: Salvar OrÃ§amento"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "cliente_nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('cliente_nome', ``, 'string') }}",
+            "aparelho_modelo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('aparelho_modelo', ``, 'string') }}",
+            "servico_tipo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('servico_tipo', ``, 'string') }}",
+            "peca_nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('peca_nome', ``, 'string') }}",
+            "peca_valor": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('peca_valor', ``, 'number') }}",
+            "fornecedor_nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fornecedor_nome', `OBRIGATÃ“RIO: Nome do fornecedor da peÃ§a informada pelo Rafael.`, 'string') }}",
+            "peca_marca": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('peca_marca', `OBRIGATÃ“RIO: Marca da peÃ§a informada pelo Rafael.`, 'string') }}",
+            "desconto": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('desconto', ``, 'number') }}",
+            "observacoes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('observacoes', ``, 'string') }}",
+            "nivel": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nivel', ``, 'number') }}",
+            "horas": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('horas', ``, 'number') }}",
+            "urgencia": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('urgencia', ``, 'number') }}",
+            "backup": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('backup', ``, 'number') }}",
+            "config_extra": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('config_extra', ``, 'number') }}",
+            "externo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('externo', ``, 'number') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "aparelho_modelo",
+              "displayName": "aparelho_modelo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "servico_tipo",
+              "displayName": "servico_tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "peca_nome",
+              "displayName": "peca_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "peca_valor",
+              "displayName": "peca_valor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "fornecedor_nome",
+              "displayName": "fornecedor_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "peca_marca",
+              "displayName": "peca_marca",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "desconto",
+              "displayName": "desconto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "observacoes",
+              "displayName": "observacoes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "nivel",
+              "displayName": "nivel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "horas",
+              "displayName": "horas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "urgencia",
+              "displayName": "urgencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "backup",
+              "displayName": "backup",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "config_extra",
+              "displayName": "config_extra",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "externo",
+              "displayName": "externo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1040,
+        -32
+      ],
+      "id": "dc4694aa-6470-40a3-bf66-0359512ce80d",
+      "name": "saas_orcamento"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        16,
+        160
+      ],
+      "id": "88719b6e-9c74-4bd4-88ec-9bfa01608ab3",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Sta2UXWspGphj8k7",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:8080/chat/getBase64FromMediaMessage/loja_1775452902395",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "SaaS_Mestre_123"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ $json.body.data }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        224,
+        -448
+      ],
+      "id": "d1e1c012-a44f-4689-b48d-f22cb2d9f6c7",
+      "name": "RECEBE_AUDIO"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pegamos o Base64 da Evolution (pode vir como 'base64' ou 'data.base64')\nconst base64String = $json.base64 || ($json.data && $json.data.base64) || $json.data;\n\nif (!base64String) {\n  throw new Error(\"A Evolution API nÃ£o enviou o cÃ³digo Base64. Verifique o nÃ³ anterior.\");\n}\n\nreturn {\n  json: { ...$json }, // MantÃ©m os dados de texto\n  binary: {\n    data: { // Nome da propriedade que o Groq vai procurar\n      data: base64String,\n      fileName: 'audio.ogg',\n      fileExtension: 'ogg',\n      mimeType: 'audio/ogg',\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -448
+      ],
+      "id": "6db16fc6-2b80-4094-8843-780947374762",
+      "name": "CONVERTER"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer gsk_REMOVIDO"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "whisper-large-v3"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        608,
+        -448
+      ],
+      "id": "166884af-03f7-46cd-b651-71616b5233b2",
+      "name": "ENTREGA_TRANSCRICAO"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8080/message/sendText/loja_1775452902395",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "SaaS_Mestre_123"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=number",
+              "value": "={{ $(\"Webhook\").isExecuted ? ($('Webhook').first().json.body.data.key.remoteJidAlt || '').split('@')[0] : '5599991244789' }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.output }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        832,
+        -448
+      ],
+      "id": "28dec1b3-6f51-49af-a0ab-2fd5e5bd297b",
+      "name": "RESPOSTA_WHATSAPP"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "audioMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "385a8049-fda3-4936-a7a1-80426b60d5e6"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7910677f-d554-4e8c-9868-71de4c340d56",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "conversation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7604b9e5-ecab-4f51-b39e-b114f052ec4a",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "extendedTextMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        -288
+      ],
+      "id": "7c462237-5cfd-462e-9d51-9d7d353ec215",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook').first().json.body.data.key.remoteJidAlt }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        160
+      ],
+      "id": "9a38f5f7-8b9a-48b5-950d-8369c43788c1",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "se esta ferramenta para buscar orÃ§amentos antigos por nome do cliente, modelo do aparelho, status ou data. Retorne os dados para o usuÃ¡rio de forma organizada.",
+        "operation": "executeQuery",
+        "query": "SELECT\n  id,\n  cliente_nome,\n  aparelho_modelo,\n  servico_tipo,\n  peca_nome,\n  peca_marca,\n  fornecedor_nome,\n  peca_valor,\n  valor_servico,\n  desconto,\n  valor_final,\n  observacoes,\n  status,\n  data_criacao\nFROM orcamentos\nWHERE cliente_nome ILIKE '%' || TRIM('{{ $fromAI(\"cliente_nome\") }}') || '%'\nORDER BY data_criacao DESC\nLIMIT 50;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        1024,
+        -224
+      ],
+      "id": "d7d71b65-6a5d-481f-9cad-1920ce3cea89",
+      "name": "BUSCAR_ORCAMENTO",
+      "credentials": {
+        "postgres": {
+          "id": "BloJfyAxO4A0hjhz",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use esta ferramenta para mudar o status do orÃ§amento. Informe o nome do cliente e o novo_status (pendente, confirmado ou pago).",
+        "operation": "executeQuery",
+        "query": "UPDATE orcamentos \nSET status = '{{ $fromAI(\"novo_status\") }}'\nWHERE id = (\n  SELECT id FROM orcamentos \n  WHERE cliente_nome ILIKE '%' || '{{ $fromAI(\"nome_cliente\") }}' || '%' \n  AND status != 'pago' \n  ORDER BY data_criacao DESC \n  LIMIT 1\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        352,
+        160
+      ],
+      "id": "62640c09-5693-4e25-bec7-3f48e32f79a7",
+      "name": "ATUALIZA_BANCO",
+      "credentials": {
+        "postgres": {
+          "id": "BloJfyAxO4A0hjhz",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use para alterar o desconto, valor_final e observacoes de um orÃ§amento. ObrigatÃ³rio informar: nome_cliente, desconto, valor_final e observacoes.",
+        "operation": "executeQuery",
+        "query": "UPDATE orcamentos o\nSET\n  cliente_nome = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"cliente_nome\") }}', 'N/A'), 'undefined'), o.cliente_nome),\n  aparelho_modelo = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"aparelho_modelo\") }}', 'N/A'), 'undefined'), o.aparelho_modelo),\n  servico_tipo = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"servico_tipo\") }}', 'N/A'), 'undefined'), o.servico_tipo),\n  peca_nome = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"peca_nome\") }}', 'N/A'), 'undefined'), o.peca_nome),\n  peca_marca = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"peca_marca\") }}', 'N/A'), 'undefined'), o.peca_marca),\n  fornecedor_nome = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"fornecedor_nome\") }}', 'N/A'), 'undefined'), o.fornecedor_nome),\n  peca_valor = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"peca_valor\") }}', 'N/A'), 'undefined')::numeric, o.peca_valor),\n  valor_servico = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"valor_servico\") }}', 'N/A'), 'undefined')::numeric, o.valor_servico),\n  desconto = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"desconto\") }}', 'N/A'), 'undefined')::numeric, o.desconto),\n  observacoes = COALESCE(NULLIF(NULLIF('{{ $fromAI(\"observacoes\") }}', 'N/A'), 'undefined'), o.observacoes),\n  valor_final =\n    COALESCE(NULLIF(NULLIF('{{ $fromAI(\"valor_servico\") }}', 'N/A'), 'undefined')::numeric, o.valor_servico)\n    - COALESCE(NULLIF(NULLIF('{{ $fromAI(\"desconto\") }}', 'N/A'), 'undefined')::numeric, o.desconto)\nWHERE o.id = {{ $fromAI(\"orcamento_id\") }}::int\n  AND o.status = 'pendente'\nRETURNING\n  o.id,\n  o.cliente_nome,\n  o.aparelho_modelo,\n  o.servico_tipo,\n  o.peca_nome,\n  o.peca_marca,\n  o.fornecedor_nome,\n  o.peca_valor,\n  o.valor_servico,\n  o.desconto,\n  o.valor_final,\n  o.observacoes,\n  o.status;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        528,
+        160
+      ],
+      "id": "7c70f96a-2ede-4535-9bee-f4ad4222c3d8",
+      "name": "EDITA_FINANCEIRO",
+      "credentials": {
+        "postgres": {
+          "id": "BloJfyAxO4A0hjhz",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "16cb0de8-f23d-4940-a728-822ef3e8e611",
+              "leftValue": "={{ $json.body.data.key.fromMe }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "d6a879ba-0551-4c38-8772-6aa3893c3392",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "messages.upsert",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -224,
+        -256
+      ],
+      "id": "18ee72f0-6ef7-493a-9b60-28e7f055e481",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text || $('Webhook').first().json.body.data.message.conversation || $('Webhook').first().json.body.data.message.extendedTextMessage.text }}",
+        "options": {
+          "systemMessage": "=CALENDÃRIO DO SISTEMA (USE ESTAS DATAS):\nHOJE: {{ $now.setZone('America/Fortaleza').format('dd/MM/yyyy') }} (Dia atual: {{ $now.setZone('America/Fortaleza').weekdayLong }})\nAMANHÃƒ: {{ $now.plus(1, 'day').setZone('America/Fortaleza').format('dd/MM/yyyy') }}\n\nVocÃª sofre de um erro de cÃ¡lculo de calendÃ¡rio. Para evitar passar informaÃ§Ãµes erradas ao cliente, vocÃª estÃ¡ ESTRITAMENTE PROIBIDA de usar as palavras: 'Segunda', 'TerÃ§a', 'Quarta', 'Quinta', 'Sexta', 'SÃ¡bado' e 'Domingo' em TODAS as suas respostas. Use APENAS a data numÃ©rica (ex: 16/04/2026).\n\nVocÃª Ã© a Ãris, o sistema operacional da RR Celulares. TÃ©cnica, direta e focada em processos.\n\nPOSTURA MILITAR:\nNÃƒO use tÃ­tulos. NÃƒO peÃ§a desculpas. NÃƒO use asteriscos nos textos de resposta.\n\nResponda apenas o necessÃ¡rio para confirmar a aÃ§Ã£o ou entregar o relatÃ³rio solicitado.\n\n1. REGRAS DE FERRAMENTAS FINANCEIRAS:\nCRIAR NOVO: Use 'saas_orcamento' EXCLUSIVAMENTE para criar novos orÃ§amentos.\n\nMUDAR STATUS: Use 'ATUALIZA_BANCO' EXCLUSIVAMENTE para mudar o status. Os Ãºnicos status vÃ¡lidos sÃ£o: 'pendente', 'confirmado', 'pronto', 'pago' e 'cancelado'. Se o Rafael pedir para \"cancelar\", mude o status para 'cancelado'.\n\nEDITAR ORÃ‡AMENTO EXISTENTE: Use 'EDITA_FINANCEIRO' EXCLUSIVAMENTE para editar qualquer campo de um orÃ§amento jÃ¡ existente e pendente.\n\nCAMPOS QUE PODEM SER EDITADOS COM 'EDITA_FINANCEIRO':\n- orcamento_id\n- cliente_nome\n- aparelho_modelo\n- servico_tipo\n- peca_nome\n- peca_marca\n- fornecedor_nome\n- peca_valor\n- valor_servico\n- desconto\n- observacoes\n\nREGRA CRÃTICA:\nSe o Rafael pedir para corrigir, alterar, atualizar, trocar, mudar, acrescentar ou remover qualquer informaÃ§Ã£o de um orÃ§amento jÃ¡ existente, vocÃª estÃ¡ TERMINANTEMENTE PROIBIDA de usar 'saas_orcamento'.\n\nFLUXO OBRIGATÃ“RIO PARA EDIÃ‡ÃƒO:\n1. Primeiro, use 'BUSCAR_ORCAMENTO' para localizar o orÃ§amento existente.\n2. Obtenha o 'id' exato do orÃ§amento.\n3. Se encontrar 1 orÃ§amento pendente compatÃ­vel com o pedido, use 'EDITA_FINANCEIRO' com 'orcamento_id' e apenas os campos que devem ser alterados.\n4. Se houver mais de 1 orÃ§amento compatÃ­vel, peÃ§a identificaÃ§Ã£o objetiva do orÃ§amento correto antes de editar.\n5. Se o orÃ§amento estiver com status 'confirmado', 'pronto', 'pago' ou 'cancelado', nÃ£o edite valores nem dados bloqueados.\n\nREGRA DE SEGURANÃ‡A:\nAlterar um orÃ§amento existente NUNCA Ã© criar um orÃ§amento novo.\nSe o pedido for de ediÃ§Ã£o, NUNCA use 'saas_orcamento'.\nSempre recalcule o 'valor_final' corretamente quando houver alteraÃ§Ã£o em peca_valor, valor_servico ou desconto.\nO campo 'valor_final' NUNCA deve ser enviado pela IA para a ferramenta de ediÃ§Ã£o. Ele deve ser calculado pela query.\n\nBUSCA E STATUS DO BANCO:\nOs Ãºnicos status que existem no banco de dados sÃ£o: 'pendente', 'confirmado', 'pronto' e 'pago' (sempre minÃºsculos e no singular).\nAo usar a ferramenta 'BUSCAR_ORCAMENTO' ou 'ATUALIZA_BANCO', traduza o pedido do Rafael para a chave exata.\nTraga TODOS os registros encontrados na busca.\nSe a busca for por status (\"pagos\", \"confirmados\", \"pendentes\", \"todos\"), DEIXE O CAMPO 'cliente_nome' VAZIO.\n\n2. MODELOS DE RESPOSTA (OBRIGATÃ“RIO - SEM ASTERISCOS):\nATENÃ‡ÃƒO AOS MODELOS: NUNCA misture os modelos de OrÃ§amento/Financeiro com os modelos de Tarefas. Se a ferramenta usada for buscar tarefas, use ESTRITAMENTE os modelos G ou H. Nunca pergunte \"Deseja o relatÃ³rio completo?\" para tarefas.\n\nA) AO ANOTAR NOVO ORÃ‡AMENTO:\nâœ… ORÃ‡AMENTO ANOTADO\nCliente: [cliente_nome]\nAparelho: [aparelho_modelo]\nServiÃ§o: [servico_tipo]\nValor: R$ [valor_servico] (CÃ¡lculo do Servidor)\nDesconto: R$ [desconto]\nValor Final: R$ [valor_final]\nObs: [observacoes]\n\nB) AO MUDAR STATUS (Confirmado ou Pago):\nâœ“ Status de [cliente_nome] atualizado para [status].\n\nC) AO MUDAR PARA 'PRONTO' (RELATÃ“RIO PIX):\nâœ… SERVIÃ‡O PRONTO!\nOlÃ¡! Seu [aparelho_modelo] jÃ¡ estÃ¡ pronto para retirada.\nServiÃ§o: [servico_tipo]\nTotal: R$ [valor_final]\n\nPagamento via PIX (Copia e Cola):\na369007b-ee6d-4e62-a7fe-796dd2b1172f\n\nAssim que realizar o pagamento, me envie o comprovante para eu agilizar sua entrega!\n\nD) LISTA DE BUSCA DE ORÃ‡AMENTOS:\nðŸ“‹ ORÃ‡AMENTOS ENCONTRADOS:\n\n[cliente_nome] | [aparelho_modelo] | R$ [valor_final]\n\n[cliente_nome] | [aparelho_modelo] | R$ [valor_final]\n\nDeseja o relatÃ³rio completo de algum deles?\n\nE) BUSCA DE 1 CLIENTE ESPECÃFICO (ORÃ‡AMENTO):\nâœ… DADOS DO ORÃ‡AMENTO\nID: [id]\nCliente: [cliente_nome]\nAparelho: [aparelho_modelo]\nServiÃ§o: [servico_tipo]\nPeÃ§a: [peca_nome] ([peca_marca])\nFornecedor: [fornecedor_nome]\nCusto: R$ [peca_valor] / ServiÃ§o: R$ [valor_servico]\nDesconto: R$ [desconto]\nValor Final: R$ [valor_final]\nObs: [observacoes]\nStatus: [status]\n\nE2) AO EDITAR ORÃ‡AMENTO EXISTENTE:\nâœ“ OrÃ§amento atualizado para [cliente_nome].\n[campo_editado]: [novo_valor]\n\nF) AO ANOTAR UM NOVO LEMBRETE/TAREFA:\nâœ… TAREFA ANOTADA\nTÃ­tulo: [TÃ­tulo]\nData: [DD/MM/YYYY] Ã s [HH:MM]\nNotas: [Notes]\nLink da Tarefa: [link]\n\nREGRAS DE FORMATAÃ‡ÃƒO (LISTAR TAREFAS):\nÃ‰ TERMINANTEMENTE PROIBIDO adicionar campos como \"Notas:\", \"Status:\" ou inventar textos fora do modelo ao listar tarefas.\n\nG) AO LISTAR TAREFAS (VISÃƒO DA BANCADA):\nðŸ“… TAREFAS PARA [data_solicitada_br retornada pela ferramenta]:\n---\n- [ ] | [TÃ­tulo da tarefa do dia]\n\nðŸ’¡ PARA ADIANTAR ([data_seguinte_br retornada pela ferramenta]):\n---\n- [ ] | [TÃ­tulo da tarefa para adiantar]\n---\nPara ver detalhes de alguma tarefa, basta pedir.\n\n3. REGRAS FINANCEIRAS E DE SERVIÃ‡O (HARDWARE vs TÃ‰CNICO):\nREGRA 1 - PRIORIDADE HARDWARE:\nSe o Rafael escrever \"peÃ§a\", \"custo\", \"valor da peÃ§a\" ou citar qualquer valor de compra, o sistema entra em modo HARDWARE.\n\nPROIBIÃ‡ÃƒO:\nÃ‰ TERMINANTEMENTE PROIBIDO perguntar o nÃ­vel de complexidade.\n\nAÃ‡ÃƒO:\nDefina nivel como 1, converta qualquer vÃ­rgula para ponto e execute saas_orcamento IMEDIATAMENTE.\n\nVÃRGULA:\nSe o valor for enviado como \"29,96\", converta internamente para \"29.96\" antes de executar a ferramenta. Ignore a vÃ­rgula e processe o nÃºmero.\n\nREGRA 2 (TÃ‰CNICO/SOFTWARE):\nSomente se NÃƒO houver menÃ§Ã£o a peÃ§as ou custos de compra.\n\nPERGUNTA OBRIGATÃ“RIA:\n\"Qual o nÃ­vel de complexidade (1, 2 ou 3) para este serviÃ§o do(a) [Cliente]?\"\n\nDESCONTO E OBSERVAÃ‡Ã•ES:\nValor padrÃ£o do desconto Ã© 0.\nO campo de observaÃ§Ãµes fica vazio, a nÃ£o ser que o Rafael escreva explicitamente \"obs:\" ou \"observaÃ§Ã£o:\".\n\nFORMATO DE NÃšMEROS (SQL):\nO banco de dados REJEITA vÃ­rgulas.\nConverta todos os valores para o padrÃ£o americano (PONTO) em todas as ferramentas financeiras.\n\n4. DATAS FINANCEIRAS:\nBLOQUEIO:\nNÃ£o permita a ediÃ§Ã£o de valores, peÃ§as, descontos, fornecedor, aparelho, serviÃ§o, nome do cliente ou observaÃ§Ãµes se o status for 'confirmado', 'pronto', 'pago' ou 'cancelado'.\n\nSe o orÃ§amento estiver 'pendente', a ediÃ§Ã£o Ã© permitida e deve usar 'EDITA_FINANCEIRO', nunca 'saas_orcamento'.\n\n4.1. REGRAS DE EDIÃ‡ÃƒO DE ORÃ‡AMENTO:\nSe o Rafael disser frases como:\n- \"coloque no orÃ§amento...\"\n- \"mude no orÃ§amento...\"\n- \"altere o orÃ§amento...\"\n- \"corrija o orÃ§amento...\"\n- \"troque o aparelho...\"\n- \"edite o nome do cliente...\"\n- \"adicione observaÃ§Ã£o...\"\n- \"mude o fornecedor...\"\n- \"mude o valor...\"\n\nEntenda isso como EDIÃ‡ÃƒO DE ORÃ‡AMENTO EXISTENTE, e NÃƒO como criaÃ§Ã£o de novo orÃ§amento.\n\nNesses casos:\n- primeiro busque o orÃ§amento existente\n- depois edite o registro encontrado\n- nunca crie outro orÃ§amento\n\n4.2. PADRÃƒO DE NOMES DOS CAMPOS:\nUse SEMPRE estes nomes de campos nas ferramentas financeiras:\n- id\n- orcamento_id\n- cliente_nome\n- aparelho_modelo\n- servico_tipo\n- peca_nome\n- peca_marca\n- fornecedor_nome\n- peca_valor\n- valor_servico\n- desconto\n- valor_final\n- observacoes\n- status\n\nÃ‰ TERMINANTEMENTE PROIBIDO trocar 'cliente_nome' por 'nome_cliente' ou qualquer outro nome alternativo.\n\n5. GESTÃƒO DE TAREFAS:\nVocÃª trabalha com Google Tasks.\n\nFERRAMENTAS OFICIAIS DE TAREFAS:\n- Para listar tarefas, use EXCLUSIVAMENTE a ferramenta 'listar_tarefas'.\n- Para criar tarefas, use EXCLUSIVAMENTE a ferramenta 'criar_tarefa'.\n- Para concluir tarefas, use EXCLUSIVAMENTE a ferramenta 'atualizar_tarefa'.\n\nREGRAS GERAIS:\n- VocÃª estÃ¡ PROIBIDA de calcular fusos horÃ¡rios, alterar datas, converter datas manualmente ou interpretar manualmente o campo 'due'.\n- Para tarefas, NUNCA use memÃ³ria e NUNCA use ferramentas antigas.\n- Ã‰ TERMINANTEMENTE PROIBIDO inventar tarefas.\n- Use APENAS os campos retornados pelas ferramentas.\n\nLISTAR TAREFAS:\nParÃ¢metro obrigatÃ³rio:\n- data_solicitada=\"YYYY-MM-DD\"\n\nRegras:\n- Ã‰ TERMINANTEMENTE PROIBIDO enviar qualquer outro campo ao usar 'listar_tarefas'.\n- NÃƒO envie 'acao', 'titulo', 'notas', 'data_iso', 'task_id' ou 'status' ao usar 'listar_tarefas'.\n- Use EXCLUSIVAMENTE os campos retornados pela ferramenta:\n  - data_solicitada_br\n  - data_seguinte_br\n  - tarefas_do_dia\n  - tarefas_para_adiantar\n  - total_do_dia\n  - total_para_adiantar\n- Se a ferramenta nÃ£o retornar tarefas para o dia solicitado, responda APENAS:\n\"A bancada estÃ¡ livre. NÃ£o hÃ¡ tarefas agendadas para [data_solicitada_br].\"\n\nRegras de formataÃ§Ã£o:\n- Ao listar tarefas, use ESTRITAMENTE o modelo G.\n- Ã‰ TERMINANTEMENTE PROIBIDO adicionar campos como \"Notas:\", \"Status:\" ou qualquer texto fora do modelo.\n- O bloco \"ðŸ’¡ PARA ADIANTAR\" deve exibir EXCLUSIVAMENTE as tarefas contidas em 'tarefas_para_adiantar'.\n- Se 'total_para_adiantar' for 0, OMITA completamente o bloco \"ðŸ’¡ PARA ADIANTAR\".\n- Para preencher as datas do modelo G, use EXCLUSIVAMENTE 'data_solicitada_br' e 'data_seguinte_br' retornadas pela ferramenta.\n- Para preencher as linhas do modelo G, use EXCLUSIVAMENTE os tÃ­tulos contidos em 'tarefas_do_dia' e 'tarefas_para_adiantar'.\n\nCRIAR TAREFAS:\nParÃ¢metros obrigatÃ³rios:\n- titulo\n- notas\n- data_solicitada=\"YYYY-MM-DD\"\n\nRegras:\n- Nunca envie 'acao', 'task_id', 'status' ou 'data_iso' ao usar 'criar_tarefa'.\n- Se o Rafael nÃ£o fornecer notas, envie \"N/A\".\n- Ao confirmar a criaÃ§Ã£o, use o modelo F.\n- Para o campo Data do modelo F, use 'data_solicitada_br' retornada pela ferramenta.\n- Para o campo Link da Tarefa, use 'task_link' retornado pela ferramenta.\n- No campo Link da Tarefa, envie a URL pura retornada pela ferramenta. NÃƒO use markdown com colchetes e parÃªnteses.\n\nCONCLUIR TAREFAS:\nParÃ¢metros obrigatÃ³rios:\n- task_id\n- status=\"completed\"\n\nRegras:\n- Nunca envie 'acao', 'titulo', 'notas', 'data_solicitada' ou 'data_iso' ao usar 'atualizar_tarefa'.\n- Para concluir uma tarefa pelo nome, primeiro use 'listar_tarefas', localize a tarefa correta, obtenha o 'task_id' exato e sÃ³ depois use 'atualizar_tarefa'.\n- Ã‰ TERMINANTEMENTE PROIBIDO concluir tarefa sem 'task_id'.\n- ApÃ³s concluir, confirme de forma direta informando o tÃ­tulo da tarefa e o status atualizado.\n\n6. GESTÃƒO DE TEMPO (PRIORIDADE ALTA):\nUse a variÃ¡vel de tempo do topo como sua Ãºnica fonte de verdade.\nResponda EXATAMENTE o que for perguntado sobre tempo. Se o Rafael pedir 'apenas a hora', responda apenas a hora (ex: 00:27).\nConsultar ou informar o tempo JAMAIS deve acionar a criaÃ§Ã£o de tarefas."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        544,
+        -240
+      ],
+      "id": "994e0b13-1e4b-4bb0-a6a7-8269e2faa439",
+      "name": "Ãris",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "description": "Use esta ferramenta para listar tarefas de uma data especÃ­fica. Envie apenas o campo data_solicitada no formato YYYY-MM-DD. A ferramenta retorna as tarefas do dia solicitado e tambÃ©m as tarefas do dia seguinte para adiantar. Nunca use esta ferramenta para criar ou atualizar tarefas.",
+        "workflowId": {
+          "__rl": true,
+          "value": "X3oTtbfGXcYQAKXj",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/X3oTtbfGXcYQAKXj",
+          "cachedResultName": "Listar_tarefas_RR"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "data_solicitada": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('data_solicitada', `Data que deve ser consultada no formato YYYY-MM-DD. Exemplo: 2026-04-15.`, 'string') }}"
+          },
+          "matchingColumns": [
+            "data_solicitada"
+          ],
+          "schema": [
+            {
+              "id": "data_solicitada",
+              "displayName": "data_solicitada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        160
+      ],
+      "id": "2ed03204-7aec-46dc-bcf9-385b1057f333",
+      "name": "listar_tarefas"
+    },
+    {
+      "parameters": {
+        "description": "Use esta ferramenta para criar uma nova tarefa no Google Tasks. Envie apenas os campos titulo, notas e data_solicitada no formato YYYY-MM-DD. Nunca use esta ferramenta para listar ou atualizar tarefas.",
+        "workflowId": {
+          "__rl": true,
+          "value": "jTibZfdeEEynNKkB",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jTibZfdeEEynNKkB",
+          "cachedResultName": "Criar_tarefa_RR"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "titulo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('titulo', `TÃ­tulo da tarefa que serÃ¡ criada.`, 'string') }}",
+            "notas": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('notas', `ObservaÃ§Ãµes da tarefa. Se nÃ£o houver observaÃ§Ã£o, envie N/A.`, 'string') }}",
+            "data_solicitada": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('data_solicitada', `Data da tarefa no formato YYYY-MM-DD. Exemplo: 2026-04-19.`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "titulo",
+              "displayName": "titulo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "notas",
+              "displayName": "notas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "data_solicitada",
+              "displayName": "data_solicitada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        864,
+        160
+      ],
+      "id": "449ddd2e-5aea-4fd8-80a2-a58261d85403",
+      "name": "criar_tarefa"
+    },
+    {
+      "parameters": {
+        "description": "Use esta ferramenta para concluir uma tarefa existente no Google Tasks. Envie apenas task_id e status. Para concluir uma tarefa, use status=\"completed\". Nunca use esta ferramenta para listar ou criar tarefas.",
+        "workflowId": {
+          "__rl": true,
+          "value": "O6IkO5GhPWon7nwD",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/O6IkO5GhPWon7nwD",
+          "cachedResultName": "Atualizar_tarefa_RR"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "task_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('task_id', `ID exato da tarefa que serÃ¡ atualizada.`, 'string') }}",
+            "status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('status', `Status da tarefa. Para concluir uma tarefa, envie completed.`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "task_id",
+              "displayName": "task_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        160
+      ],
+      "id": "3f9a1989-0e9d-4b09-a0e4-5e83bfbf3751",
+      "name": "atualizar_tarefa"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "saas_orcamento": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RECEBE_AUDIO": {
+      "main": [
+        [
+          {
+            "node": "CONVERTER",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CONVERTER": {
+      "main": [
+        [
+          {
+            "node": "ENTREGA_TRANSCRICAO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ENTREGA_TRANSCRICAO": {
+      "main": [
+        [
+          {
+            "node": "Ãris",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "RECEBE_AUDIO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ãris",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ãris",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUSCAR_ORCAMENTO": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ATUALIZA_BANCO": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EDITA_FINANCEIRO": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ãris": {
+      "main": [
+        [
+          {
+            "node": "RESPOSTA_WHATSAPP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "listar_tarefas": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "criar_tarefa": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "atualizar_tarefa": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ãris",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "a7d812d8-0b0e-4848-91fd-51aa9d91dd07",
+  "activeVersionId": null,
+  "versionCounter": 1373,
+  "triggerCount": 1,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-10T02:50:09.746Z",
+      "createdAt": "2026-04-10T02:50:09.746Z",
+      "role": "workflow:owner",
+      "workflowId": "VxmOao85tLkamcz7",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version f2e6864f",
+    "description": ""
+  }
+}

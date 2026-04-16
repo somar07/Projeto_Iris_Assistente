@@ -1,0 +1,304 @@
+{
+  "updatedAt": "2026-04-15T15:15:26.615Z",
+  "createdAt": "2026-04-15T14:35:59.985Z",
+  "id": "3t3vjLrclXpEnt7i",
+  "name": "Editar_tarefa_RR",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "task_id"
+            },
+            {
+              "name": "titulo"
+            },
+            {
+              "name": "notas"
+            },
+            {
+              "name": "data_solicitada"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3815c85e-85dd-4871-9082-569aebad3a51",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "task": "MTgzMzI5NjA2MTIzODY4MzUxODE6MDow",
+        "taskId": "={{ $('When Executed by Another Workflow').first().json.task_id }}"
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "36972305-9e02-4f72-98e1-81f9511b5df2",
+      "name": "Get a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "xIrv5nUQ2YHF4msK",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "75c5ca9f-248a-40c5-ba79-c605dcf74496",
+              "name": "=task_id",
+              "value": "={{ $('When Executed by Another Workflow').first().json.task_id }}",
+              "type": "string"
+            },
+            {
+              "id": "f27bf082-a574-4044-8a1d-bbf640809fb5",
+              "name": "titulo_final",
+              "value": "={{ $('When Executed by Another Workflow').first().json.titulo !== 'N/A' ? $('When Executed by Another Workflow').first().json.titulo : $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "edc252b4-6c13-46c1-aa86-7387715855f2",
+              "name": "notas_final",
+              "value": "={{ $('When Executed by Another Workflow').first().json.notas !== 'N/A' ? $('When Executed by Another Workflow').first().json.notas : ($json.notes ||\n '') }}",
+              "type": "string"
+            },
+            {
+              "id": "2df6d600-c91a-45a6-ac0a-7a4cb3465c1e",
+              "name": "data_iso_final",
+              "value": "={{ $('When Executed by Another Workflow').first().json.data_solicitada !== 'N/A' ? $('When Executed by Another Workflow').first().json.data_solicitada + 'T00:00:00.000Z' : $json.due }}",
+              "type": "string"
+            },
+            {
+              "id": "285ea396-c151-4f58-972d-b3b7e394e6f4",
+              "name": "data_solicitada_iso",
+              "value": "={{ $('When Executed by Another Workflow').first().json.data_solicitada !== 'N/A' ? $('When Executed by Another Workflow').first().json.data_solicitada : ($json.due ? $json.due.slice(0,10) : 'N/A') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        -16
+      ],
+      "id": "9dd69fd2-817a-4fd6-87de-56bc3ae51323",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "task": "MTgzMzI5NjA2MTIzODY4MzUxODE6MDow",
+        "taskId": "={{ $json.task_id }}",
+        "updateFields": {
+          "dueDate": "={{ $json.data_iso_final }}",
+          "notes": "={{ $json.notas_final }}",
+          "title": "={{ $json.titulo_final }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -16
+      ],
+      "id": "de6bd84b-19d9-4e4b-b95a-d014358d04e5",
+      "name": "Update a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "xIrv5nUQ2YHF4msK",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\nfunction isoParaBr(iso) {\n  const [y, m, d] = iso.split('-');\n  return `${d}/${m}/${y}`;\n}\n\nconst dueIso = item.due ? String(item.due).slice(0, 10) : '';\n\nreturn [\n  {\n    json: {\n      task_id: item.id || '',\n      titulo: item.title || '',\n      notas: item.notes || '',\n      data_solicitada_iso: dueIso,\n      data_solicitada_br: dueIso ? isoParaBr(dueIso) : '',\n      task_link: item.webViewLink || item.selfLink || '',\n      status: item.status || ''\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        -16
+      ],
+      "id": "22c13f52-ce90-4af1-8704-9014eb49a5cb",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "99faea36-ec13-4fc6-b7bc-1fa7c401cc51",
+              "leftValue": "={{ $json.status === 'needsAction' && !$json.deleted }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5850c3ec-319c-4045-b405-f4595bfc02b9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\nreturn [\n  {\n    json: {\n      erro_edicao: true,\n      task_id: item.id || '',\n      titulo: item.title || '',\n      status: item.status || '',\n      deleted: item.deleted ?? false,\n      mensagem: 'Tarefa não pode ser editada porque já está concluída ou removida.'\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        256
+      ],
+      "id": "eb974047-def7-463b-8411-2680585f921b",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a task": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Update a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a task": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "task_id": "bWE5bDJvajNjMnZkeFBYXw",
+          "titulo": "N/A",
+          "notas": "N/A",
+          "data_solicitada": "2026-04-16"
+        }
+      }
+    ]
+  },
+  "versionId": "3c5a2c39-1765-42e0-8096-78164f957519",
+  "activeVersionId": null,
+  "versionCounter": 74,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-15T14:35:59.985Z",
+      "createdAt": "2026-04-15T14:35:59.985Z",
+      "role": "workflow:owner",
+      "workflowId": "3t3vjLrclXpEnt7i",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version 3c5a2c39",
+    "description": ""
+  }
+}

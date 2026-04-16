@@ -1,0 +1,52 @@
+﻿services:
+  db:
+    image: postgres:15-alpine
+    container_name: assistencia_db
+    restart: always
+    environment:
+      POSTGRES_USER: n8n_user
+      POSTGRES_PASSWORD: n8n_password
+      POSTGRES_DB: assistencia_ia
+    volumes:
+      - db_storage:/var/lib/postgresql/data
+    networks:
+      - rede_assistencia
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: assistencia_n8n
+    restart: always
+    ports:
+      - "5680:5678"
+    environment:
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=db
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=assistencia_ia
+      - DB_POSTGRESDB_USER=n8n_user
+      - DB_POSTGRESDB_PASSWORD=REMOVIDO
+      - N8N_PORT=5678
+      - WEBHOOK_URL=http://localhost:5680/
+      - GENERIC_TIMEZONE=America/Fortaleza
+    volumes:
+      - "C:/n8n-backups:/backups"
+    depends_on:
+      - db
+    networks:
+      - rede_assistencia
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8085:8080" # Mudamos de 8081 para 8085
+    networks:
+      - rede_assistencia
+    depends_on:
+      - db
+networks:
+  rede_assistencia:
+    driver: bridge
+
+volumes:
+  db_storage:
+

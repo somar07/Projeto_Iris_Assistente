@@ -1,0 +1,131 @@
+{
+  "updatedAt": "2026-04-15T05:13:51.441Z",
+  "createdAt": "2026-04-15T05:00:25.766Z",
+  "id": "O6IkO5GhPWon7nwD",
+  "name": "Atualizar_tarefa_RR",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "task_id"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "c5a51b44-27a5-4bf1-8c26-33d3d2eb4dd2",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "task": "MTgzMzI5NjA2MTIzODY4MzUxODE6MDow",
+        "taskId": "={{ $json.task_id }}",
+        "updateFields": {
+          "status": "={{ $json.status }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "8fa5455e-18e7-49a4-9bf6-955358ddf90d",
+      "name": "Update a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "xIrv5nUQ2YHF4msK",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\nfunction isoParaBr(iso) {\n  const [y, m, d] = iso.split('-');\n  return `${d}/${m}/${y}`;\n}\n\nconst dueIso = item.due ? String(item.due).slice(0, 10) : '';\n\nreturn [\n  {\n    json: {\n      task_id: item.id || '',\n      titulo: item.title || '',\n      status: item.status || '',\n      data_solicitada_iso: dueIso,\n      data_solicitada_br: dueIso ? isoParaBr(dueIso) : ''\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        -32
+      ],
+      "id": "7df3b183-053f-4f79-96d6-2cdd406be5cf",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Update a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a task": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "ad1fba7b-9219-4fe2-be2f-3cfcbadccd14",
+  "activeVersionId": "ad1fba7b-9219-4fe2-be2f-3cfcbadccd14",
+  "versionCounter": 21,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-15T05:00:25.766Z",
+      "createdAt": "2026-04-15T05:00:25.766Z",
+      "role": "workflow:owner",
+      "workflowId": "O6IkO5GhPWon7nwD",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version ad1fba7b",
+    "description": ""
+  }
+}

@@ -1,0 +1,143 @@
+﻿{
+  "updatedAt": "2026-04-15T04:34:11.500Z",
+  "createdAt": "2026-04-11T03:34:27.668Z",
+  "id": "X3oTtbfGXcYQAKXj",
+  "name": "Listar_tarefas_RR",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "data_solicitada"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        -208
+      ],
+      "id": "765a9953-a846-45b8-9222-28100d9a2759",
+      "name": "When Executed by Another Workflow",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "task": "MTgzMzI5NjA2MTIzODY4MzUxODE6MDow",
+        "returnAll": true,
+        "additionalFields": {
+          "showCompleted": false,
+          "showDeleted": false,
+          "showHidden": false
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -208
+      ],
+      "id": "c7ea9d28-f230-42b9-a9ca-e42389b315ad",
+      "name": "Get many tasks",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "xIrv5nUQ2YHF4msK",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const tarefas = $input.all();\n\n// pega a data solicitada diretamente do trigger do subworkflow\nconst dataSolicitada = $('When Executed by Another Workflow').first().json.data_solicitada;\n\n// calcula o dia seguinte sem usar o campo due das tarefas\nconst [ano, mes, dia] = dataSolicitada.split('-').map(Number);\nconst dataBase = new Date(Date.UTC(ano, mes - 1, dia));\nconst proximoDia = new Date(dataBase);\nproximoDia.setUTCDate(proximoDia.getUTCDate() + 1);\n\nconst dataSeguinte = proximoDia.toISOString().slice(0, 10);\n\n// converte YYYY-MM-DD -> DD/MM/YYYY\nfunction isoParaBr(iso) {\n  const [y, m, d] = iso.split('-');\n  return `${d}/${m}/${y}`;\n}\n\n// normaliza tarefas sem converter fuso do Google Tasks\nconst tarefasAbertas = tarefas\n  .map(item => item.json)\n  .filter(t => (t.status || '').toLowerCase() !== 'completed')\n  .map(t => {\n    const dueRaw = t.due || '';\n    const dueDate = dueRaw ? String(dueRaw).slice(0, 10) : '';\n\n    return {\n      id: t.id || '',\n      titulo: t.title || '',\n      notes: t.notes || '',\n      status: t.status || '',\n      due: dueRaw,\n      dueDate,\n    };\n  });\n\nconst tarefasDoDia = tarefasAbertas\n  .filter(t => t.dueDate === dataSolicitada)\n  .map(t => ({\n    id: t.id,\n    titulo: t.titulo,\n  }));\n\nconst tarefasParaAdiantar = tarefasAbertas\n  .filter(t => t.dueDate === dataSeguinte)\n  .map(t => ({\n    id: t.id,\n    titulo: t.titulo,\n  }));\n\nreturn [\n  {\n    json: {\n      data_solicitada_iso: dataSolicitada,\n      data_solicitada_br: isoParaBr(dataSolicitada),\n      data_seguinte_iso: dataSeguinte,\n      data_seguinte_br: isoParaBr(dataSeguinte),\n      tarefas_do_dia: tarefasDoDia,\n      tarefas_para_adiantar: tarefasParaAdiantar,\n      total_do_dia: tarefasDoDia.length,\n      total_para_adiantar: tarefasParaAdiantar.length,\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        -208
+      ],
+      "id": "4debb951-7668-4322-b05f-e2aa412f1255",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get many tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many tasks": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": {
+    "node:O_Despertador": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "data_solicitada": "2026-04-15"
+        }
+      }
+    ]
+  },
+  "versionId": "a3437a83-d26d-4d9f-869e-3aed6765ba4f",
+  "activeVersionId": null,
+  "versionCounter": 186,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-04-11T03:34:27.668Z",
+      "createdAt": "2026-04-11T03:34:27.668Z",
+      "role": "workflow:owner",
+      "workflowId": "X3oTtbfGXcYQAKXj",
+      "projectId": "0xozonLXXYJKI5bJ",
+      "project": {
+        "updatedAt": "2026-04-10T02:43:25.242Z",
+        "createdAt": "2026-04-10T02:42:50.866Z",
+        "id": "0xozonLXXYJKI5bJ",
+        "name": "Rafael Ramos Oliveira <ramosdeoliveira90@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "38ef1526-ed10-47fd-a2b5-a56959ab0d70"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version 1db5a046",
+    "description": ""
+  }
+}
